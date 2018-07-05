@@ -19,8 +19,11 @@ glm::vec3 random_in_unit_disk()
 class camera
 {
 	public:
-		camera(glm::vec3 lookfrom, glm::vec3 lookat, glm::vec3 vup, float vfov, float aspect, float aperture, float focus_dist) // vfov is top to bottom in degrees
+		camera(glm::vec3 lookfrom, glm::vec3 lookat, glm::vec3 vup, float vfov, float aspect, float aperture, float focus_dist,
+			float t0, float t1) // vfov is top to bottom in degrees
 		{
+			time0 = t0;
+			time1 = t1;
 			lens_radius = aperture * 0.5f;
 			float theta = glm::radians(vfov);
 			float half_height = glm::tan(theta * 0.5f);
@@ -41,7 +44,8 @@ class camera
 		{
 			glm::vec3 rd = lens_radius * random_in_unit_disk();
 			glm::vec3 offset = u * rd.x + v * rd.y;
-			return ray(origin + offset, lower_left_corner + s * horizontal + t * vertical - origin - offset); 
+			float time = time0 + drand48() * (time1 - time0);
+			return ray(origin + offset, lower_left_corner + s * horizontal + t * vertical - origin - offset, time); 
 		}
 
 		glm::vec3 u, v, w;
@@ -49,6 +53,7 @@ class camera
 		glm::vec3 lower_left_corner;
 		glm::vec3 horizontal;
 		glm::vec3 vertical;
+		float time0, time1;
 		float lens_radius;
 };
 
