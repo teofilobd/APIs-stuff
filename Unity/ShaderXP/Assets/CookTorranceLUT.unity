@@ -113,61 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &307851969
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 307851970}
-  - component: {fileID: 307851972}
-  - component: {fileID: 307851971}
-  m_Layer: 0
-  m_Name: MaterialController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &307851970
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 307851969}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03603515, y: 0.27536947, z: 0.90338075}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &307851971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 307851969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0355d51a6517f5c4ba6f085903bfaf74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UnityMaterial: {fileID: 2100000, guid: 130941def77ce8e4e8e293f86682a432, type: 2}
-  LUTMaterial: {fileID: 2100000, guid: 328eb9cf995788445bd8fe19513565ef, type: 2}
-  Smoothness: 1
---- !u!114 &307851972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 307851969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c0a54b4218a9874aa6b8839f547b320, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &581673113
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +307,8 @@ GameObject:
   m_Component:
   - component: {fileID: 871940219}
   - component: {fileID: 871940218}
+  - component: {fileID: 871940221}
+  - component: {fileID: 871940220}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -411,13 +358,38 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 871940217}
-  m_LocalRotation: {x: 0.007780497, y: -0.27340987, z: -0.032012224, w: 0.9613333}
+  m_LocalRotation: {x: 0.1657494, y: -0.20723517, z: 0.0024129637, w: 0.96414465}
   m_LocalPosition: {x: 0.464, y: 0.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -0.14600001, y: -31.747002, z: -3.7730002}
+  m_LocalEulerAnglesHint: {x: 18.7, y: -24.9, z: -3.877}
+--- !u!114 &871940220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 871940217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0a54b4218a9874aa6b8839f547b320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &871940221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 871940217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0355d51a6517f5c4ba6f085903bfaf74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnityMaterial: {fileID: 2100000, guid: 130941def77ce8e4e8e293f86682a432, type: 2}
+  LUTMaterial: {fileID: 2100000, guid: 328eb9cf995788445bd8fe19513565ef, type: 2}
+  Smoothness: 1
 --- !u!1 &966325852
 GameObject:
   m_ObjectHideFlags: 0
