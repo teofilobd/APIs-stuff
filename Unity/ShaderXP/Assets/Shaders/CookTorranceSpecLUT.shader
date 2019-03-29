@@ -36,7 +36,7 @@
 			{
 				float2 uv : TEXCOORD0;
 				float4 vertex : SV_POSITION;
-				half3x3 TtoW : TEXCOORD2;
+				float3x3 TtoW : TEXCOORD2;
 				float3 worldPos : TEXCOORD5;
 				float3 worldNormal : TEXCOORD6;
 				float3 viewDir : TEXCOORD7;
@@ -58,35 +58,35 @@
 
 				o.viewDir = WorldSpaceViewDir(v.vertex);
 				o.worldPos = mul(unity_ObjectToWorld, o.vertex).xyz;
-				half3 wNormal = UnityObjectToWorldNormal(v.normal);
+				float3 wNormal = UnityObjectToWorldNormal(v.normal);
 				o.worldNormal = wNormal;
-				half3 wTangent = UnityObjectToWorldDir(v.tangent.xyz);
+				float3 wTangent = UnityObjectToWorldDir(v.tangent.xyz);
 				// compute bitangent from cross product of normal and tangent
-				half tangentSign = v.tangent.w * unity_WorldTransformParams.w;
-				half3 wBitangent = cross(wNormal, wTangent) * tangentSign;
+				float tangentSign = v.tangent.w * unity_WorldTransformParams.w;
+				float3 wBitangent = cross(wNormal, wTangent) * tangentSign;
 				// output the tangent space matrix
-				o.TtoW = half3x3(half3(wTangent.x, wBitangent.x, wNormal.x),
-								 half3(wTangent.y, wBitangent.y, wNormal.y),
-								 half3(wTangent.z, wBitangent.z, wNormal.z));
+				o.TtoW = float3x3(float3(wTangent.x, wBitangent.x, wNormal.x),
+								 float3(wTangent.y, wBitangent.y, wNormal.y),
+								 float3(wTangent.z, wBitangent.z, wNormal.z));
 				return o;
 			}
 
-			fixed4 frag(v2f i) : SV_Target
+			float4 frag(v2f i) : SV_Target
 			{
-				fixed4 col = tex2D(_MainTex, i.uv);
-				fixed4 metal = tex2D(_MetallicTex, i.uv);
-				fixed3 AO = tex2D(_AOTex, i.uv);
+				float4 col = tex2D(_MainTex, i.uv);
+				float4 metal = tex2D(_MetallicTex, i.uv);
+				float3 AO = tex2D(_AOTex, i.uv);
 
-				half3 tnormal = UnpackNormal(tex2D(_BumpTex, i.uv));
-				half3 normal = mul(i.TtoW, tnormal);
+				float3 tnormal = UnpackNormal(tex2D(_BumpTex, i.uv));
+				float3 normal = mul(i.TtoW, tnormal);
 
-				half3 viewDir = normalize(i.viewDir);
-				half3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
-				float3 halfV = normalize(lightDir + viewDir);
+				float3 viewDir = normalize(i.viewDir);
+				float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
+				float3 floatV = normalize(lightDir + viewDir);
 				float NdotL = max(0, dot(normal, lightDir));
-				float NdotH = max(0, dot(normal, halfV));
+				float NdotH = max(0, dot(normal, floatV));
 				float NdotV = max(0, dot(normal, viewDir));
-				float LdotH = max(0, dot(lightDir, halfV));
+				float LdotH = max(0, dot(lightDir, floatV));
 
 				float roughness = (1 - metal.a * _Smoothness);
 
@@ -97,13 +97,13 @@
 
 				float spec = NdotL * F * G1L * G1V * D;
 
-				fixed3 diffuse = 0; // TODO
+				float3 diffuse = 0; // TODO
 				
-				fixed3 specular =  (1 - metal.rgb) * spec;
+				float3 specular =  (1 - metal.rgb) * spec;
 
 				col.rgb = ((diffuse + specular)) * _LightColor0.rgb * AO;
 
-				return fixed4(saturate(col.rgb), 1);
+				return float4(saturate(col.rgb), 1);
 			}
 			ENDCG
 		}

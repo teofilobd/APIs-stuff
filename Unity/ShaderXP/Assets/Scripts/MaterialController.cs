@@ -6,6 +6,7 @@ using UnityEngine;
 public class MaterialController : MonoBehaviour
 {
     public Material UnityMaterial;
+    public Material CTMaterial;
     public Material LUTMaterial;
 
     [Range(0.0f,1.0f)]
@@ -17,6 +18,10 @@ public class MaterialController : MonoBehaviour
 	    if(UnityMaterial != null)
         {
             UnityMaterial.SetFloat("_GlossMapScale", Smoothness);
+        }
+        if(CTMaterial != null)
+        {
+            CTMaterial.SetFloat("_Smoothness", Smoothness);
         }
         if(LUTMaterial != null)
         {
